@@ -1,0 +1,32 @@
+{% extends "blog/base.html" %}
+{% load hitcount_tags %}
+{% block content %}
+  <article class="media content-section">
+    
+    <div class="media-body">
+      <div class="article-metadata">
+        <a class="mr-2" href="{% url 'user_posts' object.author.username %}">{{ object.author }}</a>
+          <small class="text-muted">{{ object.date_posted|date:"F d, Y" }}</small>
+          <p>This Post has gotten {% get_hit_count for post %} views so far!</p>
+      </div>
+        <h2 class="article-title">{{ object.title }}</h2>
+        
+        <p class="article-content">{{ object.content }}</p>
+    </div>
+    <hr>
+    <a class="ml-auto" style="text-align: right;" href="{% url 'post_update'  object.id %}">Update</a> &ensp; <a class="text-right" href="{% url 'post_delete'  object.id %}">Delete</a>
+    
+  </article> 
+      <hr>
+      <a class="btn btn-dark" href="{% url 'add_comment_to_post' pk=post.pk %}">Add comment</a>
+      {% for comment in post.comments.all %}
+        <article class="media content-section">
+          <div class="comment">
+              <div class="date">{{ comment.comment_datetime }}</div>
+              <strong>{{ comment.author }}</strong>
+              <p>{{ comment.text|linebreaks }}</p>
+          </div>
+        </article>    
+      {% endfor %}
+
+{% endblock content %}

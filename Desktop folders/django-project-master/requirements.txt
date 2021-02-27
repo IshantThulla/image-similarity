@@ -1,0 +1,17 @@
+asgiref
+certifi
+chardet
+dj-database-url
+Django
+django-crispy-forms
+django-heroku
+django-hitcount
+gunicorn
+idna
+Pillow
+psycopg2
+pytz
+requests
+sqlparse
+urllib3
+whitenoise
